@@ -36,6 +36,7 @@ def run_discord_bot():
         API_KEY = os.getenv("WEATHER_API_KEY")
         try:
             url = f'https://api.openweathermap.org/data/2.5/weather?q={location}&appid={API_KEY}'  # takes a city and api key
+            print(url)
             response = requests.get(url)  # fetches the data with a http request using the formatted url(json format)
             data = json.loads(response.text)  # creates a dictionary from the response JSON returned
             weather = data['weather'][0]['description']
@@ -62,37 +63,3 @@ def run_discord_bot():
         print(f"{username} edited a message in '{channel}. Prior to edit: '{prev}' after edit: '{post}'")
 
     bot.run(TOKEN)
-
-
-'''
-async def send_message(message, user_message, is_private):
-    try:
-        response = await responses.handle_responses(user_message, message)
-        await message.author.send(response) if is_private else await message.channel.send(response)
-    except Exception as e:
-        print(e)
-
-    @bot.command
-    async def on_message(message):
-        if message.author == bot.user:
-            return
-        #prevents the bot from sending messages in response to itself
-
-        username = str(message.author)
-        user_message = str(message.content)
-        channel = str(message.channel)
-
-        #if user prefixes their message with a '?' bot will send a private DM and respond based on the message
-        #content sent after the '?'
-        #otherwise send the response in the same channel as the message sent
-        print(f"{username} said: '{user_message}' in ({channel})")
-        if user_message[0] == '?':
-            user_message = user_message[1:]
-            await send_message(message, user_message, is_private=True)
-
-        if message.content in react_words:
-            await message.add_reaction('\U0001F60E')
-        else:
-            await send_message(message, user_message, is_private=False)
-'''
-
