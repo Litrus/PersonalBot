@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 print("Loading tokens..")
 
-def run_discord_bot():
+def main():
     print("Bot waking up...")
     intents = discord.Intents.all()
     intents.message_content = True
@@ -63,9 +63,9 @@ def run_discord_bot():
 
     bot.run(os.getenv('DISCORD_TOKEN'))
 
-    '''TO DO
-    Learn how to github branch so i dont have to ctrl z anymore. - tonight if possible
-    
+asyncio.run(main(), debug=True)
+
+'''TO DO
     Remove main, run bot from just this one python file
     
     Figure out cogs, create a voice module that will control voice channel activities such as: join, leave and audio processing such as
