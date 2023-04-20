@@ -5,6 +5,7 @@ import requests
 import json
 from dotenv import load_dotenv
 import os
+
 class apiFunctions(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot: commands.Bot = bot
