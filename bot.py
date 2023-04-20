@@ -66,8 +66,6 @@ def main():
 asyncio.run(main(), debug=True)
 
 '''TO DO
-    Remove main, run bot from just this one python file
-    
     Figure out cogs, create a voice module that will control voice channel activities such as: join, leave and audio processing such as
     reading/playing audio files. Incorporate spotipy and play a song from a playlist.
     
