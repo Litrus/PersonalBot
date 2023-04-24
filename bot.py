@@ -10,6 +10,7 @@ class myBot(commands.Bot):
 
     async def setup_hook(self) -> None:
         await self.load_extension('cog.apiFunctions')
+        await self.load_extension('cog.voice')
     async def close(self) -> None:
         await super().close()
 
@@ -27,7 +28,7 @@ async def main():
             except Exception as e:
                 print(e)
 
-        #Command to reload every cog
+        #Reload all cogs
         @commands.is_owner()
         @bot.tree.command(name = "reload")
         async def reload_cogs(interaction: discord.Interaction):
@@ -43,7 +44,5 @@ async def main():
             await interaction.response.send_message(f"Hello {interaction.user.mention}!")
 
         await bot.start(os.getenv('DISCORD_TOKEN'))#Accesses default aenter method of the bot class
-
-
 
 asyncio.run(main(), debug = True)
