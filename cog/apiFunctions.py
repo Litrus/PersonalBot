@@ -17,7 +17,7 @@ class apiFunctions(commands.Cog):
     async def weather(self, interaction: discord.Interaction, location: str):
         API_KEY = os.getenv("WEATHER_API_KEY")
         try:
-            url = f'https://api.openweathermap.org/data/2.5/weather?q={location}&appid={API_KEY}'  #Leaving api_key as ver to be more readable
+            url = f'https://api.openweathermap.org/data/2.5/weather?q={location}&appid={API_KEY}'
             print(url)
             response = requests.get(url)  # fetches the data with a http request using the formatted url(json format)
             data = json.loads(response.text)  # creates a dictionary from the response JSON returned
@@ -30,7 +30,7 @@ class apiFunctions(commands.Cog):
             print("Fetched successfully: ", response)
             await interaction.response.send_message(message)
         except Exception as e:
-            print("Unsuccessful fetch: invalid location, API key is not working or openweather API is down.")
+            await interaction.response.send_message("Unsuccessful fetch: invalid location, API key is not working or openweather API is down.", ephemeral=True)
 
 async def setup(bot):
     await bot.add_cog(apiFunctions(bot))
