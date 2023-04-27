@@ -11,9 +11,9 @@ class voiceFunctions(commands.Cog):
     @app_commands.command(name = "join")
     async def join(self, interaction: discord.Interaction):
         try:
-            print(f"{self.bot.user} joined channel {interaction.user.voice.channel}")
             await interaction.user.voice.channel.connect()
             await interaction.response.send_message("Joined channel", ephemeral=True)
+            print(f"{self.bot.user} joined channel {interaction.user.voice.channel}")
         except Exception as e:
             print(e)
             await interaction.response.send_message("You are not in a voice channel", ephemeral=True)
@@ -21,9 +21,10 @@ class voiceFunctions(commands.Cog):
     @app_commands.command(name = "leave")
     async def leave(self, interaction: discord.Interaction):
         try:
-            voiceClient = interaction.guild.voice_client
+            voiceClient = interaction.guild.voice_client #voice_client only exists if the bot has joined a voice channel
             await voiceClient.disconnect(force=True)
             await interaction.response.send_message("Left channel", ephemeral=True)
+            print(f"{self.bot.user} left channel {interaction.user.voice.channel}")
         except Exception as e:
             print(e)
 
